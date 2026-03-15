@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mojin — Motion intelligence platform. Fine-tune spring physics, particle effects, and motion curves. Export studio-quality video from your browser.">
+  <title>Mojin — Motion Intelligence</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    @keyframes demoFloat {
+      from { transform: scale(var(--scale,1)) translateY(0); }
+      to   { transform: scale(var(--scale,1)) translateY(-20px); }
+    }
+    .demo-anim-box {
+      width: 80px; height: 80px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      animation: demoFloat 2s ease-in-out infinite alternate;
+      box-shadow: 0 0 40px rgba(139,92,246,0.4);
+      --scale: 1; --dur: 2s;
+    }
+    /* Template preview gradients */
+    .tp-1 { background: linear-gradient(135deg, #0f172a, #1e3a5f, #0f172a); }
+    .tp-2 { background: linear-gradient(135deg, #0a0a1a, #3b1f6b, #0a0a1a); }
+    .tp-3 { background: linear-gradient(135deg, #0f0f0f, #7c1e4a, #0f0f0f); }
+    .tp-4 { background: linear-gradient(135deg, #050510, #06267a, #0a0a2a); }
+    .tp-5 { background: linear-gradient(135deg, #0a1a10, #0d4a2e, #0a1a10); }
+    .tp-6 { background: linear-gradient(135deg, #0f0a1a, #3a0a5a, #0f0a1a); }
+    .tp-particle {
+      width: 6px; height: 6px; border-radius: 50%;
+      animation: tpFloat 3s ease-in-out infinite alternate;
+    }
+    @keyframes tpFloat {
+      0%   { transform: translate(0,0); opacity: 0.6; }
+      100% { transform: translate(var(--tx,10px), var(--ty,-15px)); opacity: 1; }
+    }
+    .lang-btn { background: none; border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.45); padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+    .lang-btn.active, .lang-btn:hover { border-color: rgba(255,255,255,0.35); color: #fff; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAV ═══════════════════════════════════════════════════ -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">MOJIN</a>
+      <ul class="nav-links">
+        <li><a href="#features" data-i18n="nav_features">Features</a></li>
+        <li><a href="#templates" data-i18n="nav_templates">Templates</a></li>
+        <li><a href="#pricing" data-i18n="nav_pricing">Pricing</a></li>
+        <li><a href="gallery.html" data-i18n="nav_docs">Gallery</a></li>
+      </ul>
+      <div class="nav-cta">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="de">DE</button>
+        <a href="#" class="nav-btn" data-i18n="nav_cta">Start Free</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ══════════════════════════════════════════════════ -->
+  <section class="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="ri-magic-line"></i>
+          <span data-i18n="hero_badge">Remotion + Particle Physics</span>
+        </div>
+        <h1 class="hero-title">
+          <span data-i18n="hero_title_1">Make Your</span><br>
+          <em data-i18n="hero_title_2">Videos Move</em>
+        </h1>
+        <p class="hero-sub" data-i18n="hero_sub">
+          Fine-tune spring physics, particle effects, and motion curves — export studio-quality video from your browser.
+        </p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-primary">
+            <i class="ri-play-circle-line"></i>
+            <span data-i18n="hero_cta_primary">Start Editing Free</span>
+          </a>
+          <a href="#demo" class="btn btn-ghost">
+            <i class="ri-eye-line"></i>
+            <span data-i18n="hero_cta_secondary">Watch Demo</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <i class="ri-arrow-down-line"></i>
+      <span data-i18n="hero_scroll">Scroll</span>
+    </div>
+  </section>
+
+  <!-- ═══ HOW IT WORKS ══════════════════════════════════════════ -->
+  <section class="section" id="how">
+    <div class="container">
+      <p class="eyebrow appear" data-i18n="how_eyebrow">How It Works</p>
+      <h2 class="section-title appear" data-i18n="how_title">Three steps to a better video</h2>
+      <p class="section-sub appear" data-i18n="how_sub">Upload a template, adjust the parameters, export. No After Effects required.</p>
+
+      <div class="steps-grid">
+        <div class="step-card glass-card appear">
+          <div class="step-number">01</div>
+          <div class="step-icon"><i class="ri-layout-grid-line"></i></div>
+          <h3 class="step-title" data-i18n="step1_title">Choose a Template</h3>
+          <p class="step-desc" data-i18n="step1_desc">Pick from 50+ professional Remotion compositions — cinematic intros, text reveals, logo animations, particle effects.</p>
+        </div>
+        <div class="step-card glass-card appear">
+          <div class="step-number">02</div>
+          <div class="step-icon" style="color:#8b5cf6"><i class="ri-settings-3-line"></i></div>
+          <h3 class="step-title" data-i18n="step2_title">Fine-Tune Motion</h3>
+          <p class="step-desc" data-i18n="step2_desc">Adjust spring stiffness, damping, particle count, force fields, easing curves — every slider updates the preview instantly.</p>
+        </div>
+        <div class="step-card glass-card appear">
+          <div class="step-number">03</div>
+          <div class="step-icon" style="color:#ec4899"><i class="ri-film-line"></i></div>
+          <h3 class="step-title" data-i18n="step3_title">Export HD</h3>
+          <p class="step-desc" data-i18n="step3_desc">Click export and get a 1080p MP4 in seconds. Or go 4K. Or GIF. Your call — our servers handle the render.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURES ══════════════════════════════════════════════ -->
+  <section class="section" id="features">
+    <div class="container">
+      <p class="eyebrow appear" data-i18n="feat_eyebrow">Features</p>
+      <h2 class="section-title appear" data-i18n="feat_title">Motion intelligence,<br>baked in</h2>
+      <p class="section-sub appear" data-i18n="feat_sub">Not just sliders — a real physics engine and GPU particle system driving every frame.</p>
+
+      <div class="features-grid" style="margin-top:56px">
+        <div class="feature-card glass-card appear">
+          <div class="feature-icon-wrap feature-icon-purple"><i class="ri-settings-3-line"></i></div>
+          <h3 class="feature-title" data-i18n="feat1_title">Spring Physics</h3>
+          <p class="feature-desc" data-i18n="feat1_desc">Control stiffness, damping, and mass for every animated element. Physics-based motion that actually feels real.</p>
+        </div>
+        <div class="feature-card glass-card appear">
+          <div class="feature-icon-wrap feature-icon-cyan"><i class="ri-magic-line"></i></div>
+          <h3 class="feature-title" data-i18n="feat2_title">Particle Engine</h3>
+          <p class="feature-desc" data-i18n="feat2_desc">GPU-accelerated particles: 5,000+ at 60fps. Boids, fluid, constellation, firework — 12 behavior presets.</p>
+        </div>
+        <div class="feature-card glass-card appear">
+          <div class="feature-icon-wrap feature-icon-blue"><i class="ri-eye-line"></i></div>
+          <h3 class="feature-title" data-i18n="feat3_title">Live Preview</h3>
+          <p class="feature-desc" data-i18n="feat3_desc">Remotion Player embedded right in the editor. Every slider change previews instantly — no render wait.</p>
+        </div>
+        <div class="feature-card glass-card appear">
+          <div class="feature-icon-wrap feature-icon-pink"><i class="ri-film-line"></i></div>
+          <h3 class="feature-title" data-i18n="feat4_title">Export HD</h3>
+          <p class="feature-desc" data-i18n="feat4_desc">Server-side render with Remotion Lambda. MP4, WebM, GIF, APNG. 720p to 4K. Done in seconds.</p>
+        </div>
+        <div class="feature-card glass-card appear">
+          <div class="feature-icon-wrap feature-icon-blue"><i class="ri-layout-grid-line"></i></div>
+          <h3 class="feature-title" data-i18n="feat5_title">Template Library</h3>
+          <p class="feature-desc" data-i18n="feat5_desc">50+ professional compositions. Cinematic, text, logo, particles, transitions. Download as-is or customize.</p>
+        </div>
+        <div class="feature-card glass-card appear">
+          <div class="feature-icon-wrap feature-icon-purple"><i class="ri-robot-2-line"></i></div>
+          <h3 class="feature-title" data-i18n="feat6_title">AI Motion Assist</h3>
+          <p class="feature-desc" data-i18n="feat6_desc">AI analyzes your content and suggests motion presets that match the energy and pacing of your brand.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LIVE DEMO ═════════════════════════════════════════════ -->
+  <section class="section" id="demo">
+    <div class="container">
+      <p class="eyebrow appear" data-i18n="demo_eyebrow">Live Demo</p>
+      <h2 class="section-title appear" data-i18n="demo_title">Try it right now</h2>
+      <p class="section-sub appear" data-i18n="demo_sub">Adjust the sliders — watch the preview update in real time. No signup needed.</p>
+
+      <div class="demo-inner">
+        <!-- Controls -->
+        <div class="demo-controls appear">
+          <div class="param-group">
+            <label><span data-i18n="demo_param_spring">Spring Stiffness</span> <span id="val-stiffness" class="mono">120</span></label>
+            <input type="range" class="demo-slider" data-param="stiffness" min="10" max="300" value="120">
+          </div>
+          <div class="param-group">
+            <label><span data-i18n="demo_param_particles">Particle Count</span> <span id="val-particles" class="mono">500</span></label>
+            <input type="range" class="demo-slider" data-param="particles" min="0" max="5000" value="500">
+          </div>
+          <div class="param-group">
+            <label><span data-i18n="demo_param_speed">Animation Speed</span> <span id="val-speed" class="mono">1.0</span></label>
+            <input type="range" class="demo-slider" data-param="speed" min="0.2" max="3" step="0.1" value="1.0">
+          </div>
+          <div class="param-group">
+            <label><span data-i18n="demo_param_hue">Color Hue</span> <span id="val-hue" class="mono">260</span></label>
+            <input type="range" class="demo-slider" data-param="hue" min="0" max="360" value="260">
+          </div>
+          <a href="#" class="demo-cta">
+            <span data-i18n="demo_open">Open Full Editor</span>
+            <i class="ri-arrow-right-line"></i>
+          </a>
+        </div>
+
+        <!-- Preview -->
+        <div class="demo-preview appear">
+          <div class="demo-grid-bg"></div>
+          <div class="demo-anim-box" id="demo-box"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TEMPLATES ═════════════════════════════════════════════ -->
+  <section class="section" id="templates">
+    <div class="container">
+      <p class="eyebrow appear" data-i18n="tpl_eyebrow">Templates</p>
+      <h2 class="section-title appear" data-i18n="tpl_title">Start with a template</h2>
+      <p class="section-sub appear" data-i18n="tpl_sub">Every template is a fully editable Remotion composition. Use it as-is or make it yours.</p>
+
+      <div class="templates-scroll">
+        <!-- Template 1 -->
+        <div class="template-card appear">
+          <div class="template-preview tp-1">
+            <div class="template-preview-anim">
+              <div style="color:#3b82f6;font-family:Kiona,sans-serif;font-size:28px;font-weight:900;letter-spacing:2px;text-shadow:0 0 30px rgba(59,130,246,0.6)">TITLE</div>
+            </div>
+          </div>
+          <div class="template-info">
+            <span class="template-badge badge-blue">Cinematic</span>
+            <h3 class="template-name" data-i18n="tpl1_name">Cinematic Intro</h3>
+            <p class="template-desc" data-i18n="tpl1_desc">Dramatic title reveal with particle trails and depth-of-field blur.</p>
+            <div class="template-actions">
+              <button class="btn-sm btn-sm-primary" data-i18n="tpl_use">Use Template</button>
+              <button class="btn-sm btn-sm-ghost" data-i18n="tpl_preview">Preview</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Template 2 -->
+        <div class="template-card appear">
+          <div class="template-preview tp-2">
+            <div class="template-preview-anim" style="display:flex;gap:4px">
+              <div style="color:#8b5cf6;font-size:36px;font-weight:900;text-shadow:0 0 20px rgba(139,92,246,0.8)">A</div>
+              <div style="color:#a78bfa;font-size:36px;font-weight:900;animation-delay:0.1s;text-shadow:0 0 20px rgba(139,92,246,0.6)">B</div>
+              <div style="color:#c4b5fd;font-size:36px;font-weight:900;animation-delay:0.2s">C</div>
+            </div>
+          </div>
+          <div class="template-info">
+            <span class="template-badge badge-purple">Text</span>
+            <h3 class="template-name" data-i18n="tpl2_name">Text Reveal</h3>
+            <p class="template-desc" data-i18n="tpl2_desc">Spring-animated characters with custom easing and stagger delay.</p>
+            <div class="template-actions">
+              <button class="btn-sm btn-sm-primary" data-i18n="tpl_use">Use Template</button>
+              <button class="btn-sm btn-sm-ghost" data-i18n="tpl_preview">Preview</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Template 3 -->
+        <div class="template-card appear">
+          <div class="template-preview tp-3">
+            <div class="template-preview-anim">
+              <div style="position:relative;width:60px;height:60px">
+                <div style="position:absolute;inset:0;border-radius:50%;border:2px solid rgba(236,72,153,0.6);animation:spin 3s linear infinite"></div>
+                <div style="position:absolute;inset:6px;background:linear-gradient(135deg,#ec4899,#8b5cf6);border-radius:50%;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="template-info">
+            <span class="template-badge badge-pink">Logo</span>
+            <h3 class="template-name" data-i18n="tpl3_name">Logo Burst</h3>
+            <p class="template-desc" data-i18n="tpl3_desc">Logo entrance with radial particle explosion and glow.</p>
+            <div class="template-actions">
+              <button class="btn-sm btn-sm-primary" data-i18n="tpl_use">Use Template</button>
+              <button class="btn-sm btn-sm-ghost" data-i18n="tpl_preview">Preview</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Template 4 -->
+        <div class="template-card appear">
+          <div class="template-preview tp-4">
+            <div class="template-preview-anim" style="gap:6px;flex-wrap:wrap;padding:20px;justify-content:center">
+              <div class="tp-particle" style="background:#3b82f6;--tx:15px;--ty:-20px;animation-delay:0s"></div>
+              <div class="tp-particle" style="background:#06b6d4;--tx:-10px;--ty:-15px;animation-delay:0.3s"></div>
+              <div class="tp-particle" style="background:#8b5cf6;--tx:20px;--ty:-8px;animation-delay:0.6s"></div>
+              <div class="tp-particle" style="background:#3b82f6;--tx:-5px;--ty:-25px;animation-delay:0.9s"></div>
+              <div class="tp-particle" style="background:#06b6d4;--tx:12px;--ty:-18px;animation-delay:1.2s"></div>
+              <div class="tp-particle" style="background:#ec4899;--tx:-15px;--ty:-10px;animation-delay:1.5s"></div>
+            </div>
+          </div>
+          <div class="template-info">
+            <span class="template-badge badge-cyan">Particles</span>
+            <h3 class="template-name" data-i18n="tpl4_name">Particle Storm</h3>
+            <p class="template-desc" data-i18n="tpl4_desc">Full-frame GPU particle simulation with gravity wells and color gradients.</p>
+            <div class="template-actions">
+              <button class="btn-sm btn-sm-primary" data-i18n="tpl_use">Use Template</button>
+              <button class="btn-sm btn-sm-ghost" data-i18n="tpl_preview">Preview</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Template 5 -->
+        <div class="template-card appear">
+          <div class="template-preview tp-5">
+            <div class="template-preview-anim">
+              <div style="width:80px;height:40px;border-radius:4px;background:linear-gradient(90deg,transparent,#06b6d4,transparent);animation:wipe 2s ease-in-out infinite"></div>
+            </div>
+          </div>
+          <div class="template-info">
+            <span class="template-badge badge-cyan">Transition</span>
+            <h3 class="template-name" data-i18n="tpl5_name">Fluid Wipe</h3>
+            <p class="template-desc" data-i18n="tpl5_desc">Scene transition using fluid simulation — organic, smooth, physical.</p>
+            <div class="template-actions">
+              <button class="btn-sm btn-sm-primary" data-i18n="tpl_use">Use Template</button>
+              <button class="btn-sm btn-sm-ghost" data-i18n="tpl_preview">Preview</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Template 6 -->
+        <div class="template-card appear">
+          <div class="template-preview tp-6">
+            <div class="template-preview-anim">
+              <div style="font-size:32px;font-weight:900;text-shadow:0 0 20px #8b5cf6,0 0 40px #8b5cf6;color:#c4b5fd;font-family:Kiona,sans-serif;animation:neonPulse 1.5s ease-in-out infinite alternate">NEON</div>
+            </div>
+          </div>
+          <div class="template-info">
+            <span class="template-badge badge-purple">FX</span>
+            <h3 class="template-name" data-i18n="tpl6_name">Neon Pulse</h3>
+            <p class="template-desc" data-i18n="tpl6_desc">Rhythmic neon glow animation with particle sync to audio waveform.</p>
+            <div class="template-actions">
+              <button class="btn-sm btn-sm-primary" data-i18n="tpl_use">Use Template</button>
+              <button class="btn-sm btn-sm-ghost" data-i18n="tpl_preview">Preview</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes wipe { 0%,100% { opacity:0.3; transform:scaleX(0.5); } 50% { opacity:1; transform:scaleX(1); } }
+        @keyframes neonPulse { from { text-shadow:0 0 10px #8b5cf6,0 0 20px #8b5cf6; } to { text-shadow:0 0 20px #8b5cf6,0 0 60px #8b5cf6,0 0 80px #c4b5fd; } }
+      </style>
+    </div>
+  </section>
+
+  <!-- ═══ PRICING ════════════════════════════════════════════════ -->
+  <section class="section" id="pricing">
+    <div class="container" style="text-align:center">
+      <p class="eyebrow appear" style="justify-content:center" data-i18n="price_eyebrow">Pricing</p>
+      <h2 class="section-title appear" data-i18n="price_title">Simple, honest pricing</h2>
+      <p class="section-sub appear" style="margin:0 auto" data-i18n="price_sub">Start free. Upgrade when you need more exports, resolution, or API access.</p>
+
+      <div class="pricing-grid">
+        <!-- Free -->
+        <div class="pricing-card glass-card appear">
+          <p class="pricing-tier" data-i18n="price_free">Free</p>
+          <div class="pricing-price">€0 <span></span></div>
+          <p class="pricing-period" data-i18n="price_free_sub">Forever</p>
+          <ul class="pricing-features">
+            <li><i class="ri-check-line"></i> 5 exports per month</li>
+            <li><i class="ri-check-line"></i> 720p resolution</li>
+            <li><i class="ri-check-line"></i> 500 particles max</li>
+            <li><i class="ri-check-line"></i> 3 templates</li>
+            <li><i class="ri-check-line"></i> MP4 export</li>
+          </ul>
+          <a href="#" class="btn btn-ghost pricing-cta" data-i18n="price_cta_free">Get Started Free</a>
+        </div>
+
+        <!-- Pro (featured) -->
+        <div class="pricing-card glass-card featured appear">
+          <span class="pricing-badge" data-i18n="price_most_popular">Most Popular</span>
+          <p class="pricing-tier" data-i18n="price_pro">Pro</p>
+          <div class="pricing-price">€12 <span data-i18n="price_pro_per">/ month</span></div>
+          <p class="pricing-period">Billed monthly, cancel anytime</p>
+          <ul class="pricing-features">
+            <li><i class="ri-check-line"></i> 50 exports per month</li>
+            <li><i class="ri-check-line"></i> Up to 1080p</li>
+            <li><i class="ri-check-line"></i> 2,000 particles</li>
+            <li><i class="ri-check-line"></i> All templates</li>
+            <li><i class="ri-check-line"></i> MP4, WebM, GIF</li>
+            <li><i class="ri-check-line"></i> AI Motion Assist</li>
+          </ul>
+          <a href="#" class="btn btn-primary pricing-cta" data-i18n="price_cta_pro">Start Pro Trial</a>
+        </div>
+
+        <!-- Studio -->
+        <div class="pricing-card glass-card appear">
+          <p class="pricing-tier" data-i18n="price_studio">Studio</p>
+          <div class="pricing-price">€39 <span data-i18n="price_studio_per">/ month</span></div>
+          <p class="pricing-period">Billed monthly, cancel anytime</p>
+          <ul class="pricing-features">
+            <li><i class="ri-check-line"></i> Unlimited exports</li>
+            <li><i class="ri-check-line"></i> Up to 4K</li>
+            <li><i class="ri-check-line"></i> 5,000 particles</li>
+            <li><i class="ri-check-line"></i> All templates + API</li>
+            <li><i class="ri-check-line"></i> All formats + APNG</li>
+            <li><i class="ri-check-line"></i> Priority rendering</li>
+            <li><i class="ri-check-line"></i> Team workspace</li>
+          </ul>
+          <a href="#" class="btn btn-ghost pricing-cta" data-i18n="price_cta_studio">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">MOJIN</div>
+          <p class="footer-tagline" data-i18n="footer_tagline">Motion intelligence for every creator. Powered by Remotion and GPU particle physics.</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/lunexolabs" target="_blank" rel="noopener"><i class="ri-instagram-line"></i></a>
+            <a href="https://www.youtube.com/@lunexolabs" target="_blank" rel="noopener"><i class="ri-youtube-line"></i></a>
+            <a href="https://github.com/TheWinterProgrammer" target="_blank" rel="noopener"><i class="ri-github-fill"></i></a>
+          </div>
+        </div>
+        <div>
+          <p class="footer-col-title" data-i18n="footer_col_product">Product</p>
+          <ul class="footer-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="gallery.html">Templates</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#">Editor</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title" data-i18n="footer_col_developers">Developers</p>
+          <ul class="footer-links">
+            <li><a href="#">API Reference</a></li>
+            <li><a href="#">Remotion Docs</a></li>
+            <li><a href="#">Template SDK</a></li>
+            <li><a href="https://github.com/TheWinterProgrammer/Lunexo" target="_blank">GitHub</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title" data-i18n="footer_col_company">Company</p>
+          <ul class="footer-links">
+            <li><a href="#">About</a></li>
+            <li><a href="https://www.instagram.com/lunexolabs" target="_blank">Instagram</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p data-i18n="footer_copyright">© 2026 Mojin. All rights reserved.</p>
+        <p data-i18n="footer_made_by">A Lunexo Labs product.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/lang.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

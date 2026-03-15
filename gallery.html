@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Templates — Mojin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    .gallery-hero { padding: 140px 0 80px; text-align: center; border-bottom: 1px solid var(--border); }
+    .gallery-filters { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 48px 0 32px; }
+    .filter-tab { padding: 8px 20px; border-radius: var(--r-pill); border: 1px solid var(--border); font-size: 13px; font-weight: 600; cursor: pointer; background: transparent; color: var(--text-sub); transition: all 0.2s; }
+    .filter-tab.active, .filter-tab:hover { background: var(--surface); color: #fff; border-color: var(--border-strong); }
+    .filter-tab.active { background: var(--grad); border-color: transparent; }
+    .search-input { flex: 1; max-width: 280px; padding: 9px 16px; border-radius: var(--r-pill); border: 1px solid var(--border); background: var(--surface); color: #fff; font-size: 14px; outline: none; }
+    .search-input:focus { border-color: var(--blue); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 80px; }
+    @keyframes neonPulse { from { text-shadow:0 0 10px #8b5cf6; } to { text-shadow:0 0 40px #8b5cf6,0 0 60px #c4b5fd; } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .tp-particle { width:5px;height:5px;border-radius:50%;animation:tpFloat 3s ease-in-out infinite alternate; }
+    @keyframes tpFloat { 0% { transform:translate(0,0);opacity:.6; } 100% { transform:translate(var(--tx,10px),var(--ty,-15px));opacity:1; } }
+    .lang-btn { background:none;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.45);padding:5px 12px;border-radius:20px;font-size:12px;cursor:pointer;transition:all .2s; }
+    .lang-btn.active,.lang-btn:hover { border-color:rgba(255,255,255,0.35);color:#fff; }
+    @media(max-width:768px){ .gallery-grid { grid-template-columns:1fr; } }
+    @media(max-width:1024px){ .gallery-grid { grid-template-columns:repeat(2,1fr); } }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">MOJIN</a>
+      <ul class="nav-links">
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="gallery.html" style="color:#fff">Templates</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+      </ul>
+      <div class="nav-cta">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="de">DE</button>
+        <a href="#" class="nav-btn">Start Free</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="gallery-hero">
+    <div class="container">
+      <p class="eyebrow" style="justify-content:center">Template Library</p>
+      <h1 class="section-title">50+ motion templates,<br><em class="grad-text">ready to edit</em></h1>
+      <p class="section-sub" style="margin:0 auto">Every template is a fully editable Remotion composition. Adjust physics, swap colors, export.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="gallery-filters">
+      <input type="text" class="search-input" placeholder="Search templates…">
+      <button class="filter-tab active">All</button>
+      <button class="filter-tab">Text</button>
+      <button class="filter-tab">Logo</button>
+      <button class="filter-tab">Particles</button>
+      <button class="filter-tab">Transitions</button>
+      <button class="filter-tab">Cinematic</button>
+      <button class="filter-tab">FX</button>
+    </div>
+
+    <div class="gallery-grid">
+      <!-- 12 template cards -->
+      <div class="template-card appear"><div class="template-preview" style="background:linear-gradient(135deg,#0f172a,#1e3a5f)"><div class="template-preview-anim"><div style="color:#3b82f6;font-family:Kiona,sans-serif;font-size:28px;font-weight:900;text-shadow:0 0 30px rgba(59,130,246,.6)">TITLE</div></div></div><div class="template-info"><span class="template-badge badge-blue">Cinematic</span><h3 class="template-name">Cinematic Intro</h3><p class="template-desc">Dramatic title reveal with particle trails.</p><div class="template-actions"><button class="btn-sm btn-sm-primary">Use Template</button><button class="btn-sm btn-sm-ghost">Preview</button></div></div></div>
+
+      <div class="template-card appear"><div class="template-preview" style="background:linear-gradient(135deg,#0a0a1a,#3b1f6b)"><div class="template-preview-anim" style="gap:4px"><div style="color:#8b5cf6;font-size:36px;font-weight:900;text-shadow:0 0 20px rgba(139,92,246,.8)">A</div><div style="color:#a78bfa;font-size:36px;font-weight:900">B</div><div style="color:#c4b5fd;font-size:36px;font-weight:900">C</div></div></div><div class="template-info"><span class="template-badge badge-purple">Text</span><h3 class="template-name">Text Reveal</h3><p class="template-desc">Spring-animated characters with stagger.</p><div class="template-actions"><button class="btn-sm btn-sm-primary">Use Template</button><button class="btn-sm btn-sm-ghost">Preview</button></div></div></div>
+
+      <div class="template-card appear"><div class="template-preview" style="background:linear-gradient(135deg,#0f0f0f,#7c1e4a)"><div class="template-preview-anim"><div style="position:relative;width:60px;height:60px"><div style="position:absolute;inset:0;border-radius:50%;border:2px solid rgba(236,72,153,.6);animation:spin 3s linear infinite"></div><div style="position:absolute;inset:6px;background:linear-gradient(135deg,#ec4899,#8b5cf6);border-radius:50%"></div></div></div></div><div class="template-info"><span class="template-badge badge-pink">Logo</span><h3 class="template-name">Logo Burst</h3><p class="template-desc">Logo entrance with radial particle explosion.</p><div class="template-actions"><button class="btn-sm btn-sm-primary">Use Template</button><button class="btn-sm btn-sm-ghost">Preview</button></div></div></div>
+
+      <div class="template-card appear"><div class="template-preview" style="background:linear-gradient(135deg,#050510,#06267a)"><div class="template-preview-anim" style="gap:8px;flex-wrap:wrap;padding:20px;justify-content:center"><div class="tp-particle" style="background:#3b82f6;--tx:15px;--ty:-20px"></div><div class="tp-particle" style="background:#06b6d4;--tx:-10px;--ty:-15px;animation-delay:.3s"></div><div class="tp-particle" style="background:#8b5cf6;--tx:20px;--ty:-8px;animation-delay:.6s"></div><div class="tp-particle" style="background:#3b82f6;--tx:-5px;--ty:-25px;animation-delay:.9s"></div><div class="tp-particle" style="background:#06b6d4;--tx:12px;--ty:-18px;animation-delay:1.2s"></div></div></div><div class="template-info"><span class="template-badge badge-cyan">Particles</span><h3 class="template-name">Particle Storm</h3><p class="template-desc">Full-frame GPU simulation with gravity wells.</p><div class="template-actions"><button class="btn-sm btn-sm-primary">Use Template</button><button class="btn-sm btn-sm-ghost">Preview</button></div></div></div>
+
+      <div class="template-card appear"><div class="template-preview" style="background:linear-gradient(135deg,#0a1a10,#0d4a2e)"><div class="template-preview-anim"><div style="width:80px;height:40px;border-radius:4px;background:linear-gradient(90deg,transparent,#06b6d4,transparent);animation:wipe 2s ease-in-out infinite"></div></div></div><div class="template-info"><span class="template-badge badge-cyan">Transition</span><h3 class="template-name">Fluid Wipe</h3><p class="template-desc">Scene transition using fluid simulation.</p><div class="template-actions"><button class="btn-sm btn-sm-primary">Use Template</button><button class="btn-sm btn-sm-ghost">Preview</button></div></div></div>
+      <style>@keyframes wipe{0%,100%{opacity:.3;transform:scaleX(.5)}50%{opacity:1;transform:scaleX(1)}}</style>
+
+      <div class="template-card appear"><div class="template-preview" style="background:linear-gradient(135deg,#0f0a1a,#3a0a5a)"><div class="template-preview-anim"><div style="font-size:28px;font-weight:900;text-shadow:0 0 20px #8b5cf6,0 0 40px #8b5cf6;color:#c4b5fd;font-family:Kiona,sans-serif;animation:neonPulse 1.5s ease-in-out infinite alternate">NEON</div></div></div><div class="template-info"><span class="template-badge badge-purple">FX</span><h3 class="template-name">Neon Pulse</h3><p class="template-desc">Rhythmic neon glow with particle sync.</p><div class="template-actions"><button class="btn-sm btn-sm-primary">Use Template</button><button class="btn-sm btn-sm-ghost">Preview</button></div></div></div>
+
+      <div class="template-card appear"><div class="template-preview" style="background:linear-gradient(135deg,#0a0f1a,#0a2040)"><div class="template-preview-anim"><div style="display:flex;flex-direction:column;gap:6px"><div style="height:3px;width:80px;background:linear-gradient(90deg,transparent,#3b82f6,transparent);border-radius:2px"></div><div style="height:3px;width:60px;background:linear-gradient(90deg,transparent,#06b6d4,transparent);border-radius:2px"></div><div style="height:3px;width:40px;background:linear-gradient(90deg,transparent,#8b5cf6,transparent);border-radius:2px"></div></div></div></div><div class="template-info"><span class="template-badge badge-blue">Cinematic</span><h3 class="template-name">Data Reveal</h3><p class="template-desc">Animated line chart with particle data points.</p><div class="template-actions"><button class="btn-sm btn-sm-primary">Use Template</button><button class="btn-sm btn-sm-ghost">Preview</button></div></div></div>
+
+      <div class="template-card appear"><div class="template-preview" style="background:linear-gradient(135deg,#0f0a0a,#4a1a0a)"><div class="template-preview-anim"><div style="font-size:14px;font-weight:700;font-family:JetBrains Mono,monospace;color:#f97316;letter-spacing:1px">const <span style="color:#3b82f6">motion</span> = <span style="color:#06b6d4">spring()</span></div></div></div><div class="template-info"><span class="template-badge badge-pink">Dev</span><h3 class="template-name">Code Reveal</h3><p class="template-desc">Typewriter code animation with syntax highlighting.</p><div class="template-actions"><button class="btn-sm btn-sm-primary">Use Template</button><button class="btn-sm btn-sm-ghost">Preview</button></div></div></div>
+
+      <div class="template-card appear"><div class="template-preview" style="background:linear-gradient(135deg,#050510,#1a0a3a)"><div class="template-preview-anim"><div style="display:flex;gap:3px;align-items:flex-end"><div style="width:8px;height:20px;background:#3b82f6;border-radius:2px 2px 0 0;animation:bar 1.5s ease-in-out infinite alternate"></div><div style="width:8px;height:35px;background:#8b5cf6;border-radius:2px 2px 0 0;animation:bar 1.5s ease-in-out infinite alternate;animation-delay:.2s"></div><div style="width:8px;height:25px;background:#06b6d4;border-radius:2px 2px 0 0;animation:bar 1.5s ease-in-out infinite alternate;animation-delay:.4s"></div><div style="width:8px;height:42px;background:#ec4899;border-radius:2px 2px 0 0;animation:bar 1.5s ease-in-out infinite alternate;animation-delay:.6s"></div></div></div></div><div class="template-info"><span class="template-badge badge-purple">Data</span><h3 class="template-name">Chart Motion</h3><p class="template-desc">Animated bar/line charts with spring physics.</p><div class="template-actions"><button class="btn-sm btn-sm-primary">Use Template</button><button class="btn-sm btn-sm-ghost">Preview</button></div></div></div>
+      <style>@keyframes bar{0%{transform:scaleY(.3)}100%{transform:scaleY(1)}}</style>
+
+      <div class="template-card appear"><div class="template-preview" style="background:linear-gradient(135deg,#0a0a0f,#0a0f2a)"><div class="template-preview-anim"><div style="width:50px;height:50px;border:2px solid rgba(59,130,246,.5);border-radius:8px;transform:rotate(45deg);animation:morphSpin 4s linear infinite"></div></div></div><div class="template-info"><span class="template-badge badge-blue">Abstract</span><h3 class="template-name">Morph Spin</h3><p class="template-desc">Geometric morphing with spring rotation physics.</p><div class="template-actions"><button class="btn-sm btn-sm-primary">Use Template</button><button class="btn-sm btn-sm-ghost">Preview</button></div></div></div>
+      <style>@keyframes morphSpin{to{transform:rotate(405deg) scale(1.2)}}</style>
+
+      <div class="template-card appear"><div class="template-preview" style="background:linear-gradient(135deg,#050515,#0a0a30)"><div class="template-preview-anim" style="display:grid;grid-template-columns:1fr 1fr;gap:3px"><div style="background:linear-gradient(135deg,#3b82f6,.4,transparent);height:30px;border-radius:4px;animation:gridPulse 2s ease-in-out infinite alternate"></div><div style="background:linear-gradient(135deg,#8b5cf6,.4,transparent);height:30px;border-radius:4px;animation:gridPulse 2s ease-in-out infinite alternate;animation-delay:.5s"></div><div style="background:linear-gradient(135deg,#06b6d4,.4,transparent);height:30px;border-radius:4px;animation:gridPulse 2s ease-in-out infinite alternate;animation-delay:1s"></div><div style="background:linear-gradient(135deg,#ec4899,.4,transparent);height:30px;border-radius:4px;animation:gridPulse 2s ease-in-out infinite alternate;animation-delay:1.5s"></div></div></div><div class="template-info"><span class="template-badge badge-cyan">Grid</span><h3 class="template-name">Grid Reveal</h3><p class="template-desc">Tile-by-tile reveal with stagger and spring.</p><div class="template-actions"><button class="btn-sm btn-sm-primary">Use Template</button><button class="btn-sm btn-sm-ghost">Preview</button></div></div></div>
+      <style>@keyframes gridPulse{from{opacity:.2}to{opacity:.7}}</style>
+
+      <div class="template-card appear"><div class="template-preview" style="background:linear-gradient(135deg,#0a050f,#1e0a35)"><div class="template-preview-anim"><div style="position:relative;width:70px;height:70px"><div style="position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,#3b82f6,#8b5cf6,#ec4899,#3b82f6);animation:spin 3s linear infinite;opacity:.7;filter:blur(1px)"></div><div style="position:absolute;inset:8px;border-radius:50%;background:#000"></div></div></div></div><div class="template-info"><span class="template-badge badge-purple">FX</span><h3 class="template-name">Aurora Ring</h3><p class="template-desc">Conic gradient ring animation with glow effects.</p><div class="template-actions"><button class="btn-sm btn-sm-primary">Use Template</button><button class="btn-sm btn-sm-ghost">Preview</button></div></div></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-bottom">
+      <p>© 2026 Mojin. All rights reserved.</p>
+      <p>A Lunexo Labs product.</p>
+    </div>
+  </footer>
+
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
