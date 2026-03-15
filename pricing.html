@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mojin Pricing — Simple, transparent plans. Start free, export studio-quality video. No hidden fees.">
+  <title>Pricing — Mojin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/favicon-placeholder.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    /* ── Pricing page extras ────────────────────────── */
+    .lang-btn { background: none; border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.45); padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+    .lang-btn.active, .lang-btn:hover { border-color: rgba(255,255,255,0.35); color: #fff; }
+
+    /* Hero */
+    .pricing-hero {
+      padding: 160px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse, rgba(139,92,246,0.10) 0%, rgba(59,130,246,0.06) 40%, transparent 70%);
+      pointer-events: none;
+    }
+    .pricing-hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: var(--r-pill);
+      border: 1px solid rgba(139,92,246,0.3);
+      background: rgba(139,92,246,0.08);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple);
+      letter-spacing: 0.5px;
+      margin-bottom: 28px;
+    }
+    .pricing-hero-title {
+      font-family: 'Kiona', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+    .pricing-hero-title em {
+      font-style: normal;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pricing-hero-sub {
+      font-size: 18px;
+      color: var(--text-sub);
+      max-width: 540px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    .billing-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px;
+      border-radius: var(--r-pill);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      margin-bottom: 8px;
+    }
+    .billing-toggle span {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-sub);
+      padding: 6px 16px;
+      border-radius: var(--r-pill);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .billing-toggle span.active {
+      background: var(--surface-hover);
+      color: #fff;
+      border: 1px solid var(--border-strong);
+    }
+    .billing-save {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: var(--r-pill);
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(6,182,212,0.15);
+      color: var(--cyan);
+      margin-left: 6px;
+    }
+
+    /* ── Full pricing grid ──────────────────────────── */
+    .full-pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+      align-items: start;
+    }
+    .full-pricing-card {
+      border-radius: var(--r-xl);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      background: var(--glass);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: var(--glass-border);
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .full-pricing-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+    }
+    .full-pricing-card.featured {
+      background: rgba(139,92,246,0.06);
+      box-shadow: 0 0 0 1px rgba(139,92,246,0.45), 0 0 60px rgba(139,92,246,0.10);
+    }
+    .full-pricing-card.featured::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: calc(var(--r-xl) + 1px);
+      padding: 1px;
+      background: var(--grad);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .full-pricing-badge {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: var(--r-pill);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: var(--grad);
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .full-pricing-tier {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .full-pricing-price {
+      font-family: 'Kiona', sans-serif;
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .full-pricing-price .currency {
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--text-sub);
+      vertical-align: top;
+      line-height: 2;
+    }
+    .full-pricing-price .period {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-sub);
+      font-family: 'Inter', sans-serif;
+    }
+    .full-pricing-period { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
+    .full-pricing-cta {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 24px;
+      border-radius: var(--r-pill);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s;
+      border: none;
+      margin-bottom: 32px;
+    }
+    .full-pricing-cta.primary {
+      background: var(--grad);
+      color: #fff;
+      box-shadow: 0 0 32px rgba(139,92,246,0.25);
+    }
+    .full-pricing-cta.primary:hover { box-shadow: 0 0 48px rgba(139,92,246,0.4); transform: translateY(-1px); }
+    .full-pricing-cta.ghost {
+      background: transparent;
+      color: #fff;
+      border: 1px solid var(--border-strong);
+    }
+    .full-pricing-cta.ghost:hover { background: var(--surface-hover); border-color: rgba(255,255,255,0.3); }
+    .full-pricing-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 28px;
+    }
+    .full-pricing-features { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .full-pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+    .full-pricing-features li i.check { color: var(--blue); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .full-pricing-features li i.cross { color: var(--text-muted); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .full-pricing-features .feat-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); padding-top: 12px; padding-bottom: 4px; }
+
+    /* ── Comparison table ───────────────────────────── */
+    .comparison-section { padding: var(--section-gap) 0; }
+    .comparison-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 48px;
+      font-size: 14px;
+    }
+    .comparison-table thead th {
+      padding: 20px 24px 16px;
+      text-align: center;
+      font-weight: 700;
+    }
+    .comparison-table thead th:first-child { text-align: left; }
+    .comparison-table thead .th-plan {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .comparison-table thead .th-plan.highlight { color: var(--purple); }
+    .comparison-table thead .th-price {
+      font-family: 'Kiona', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+    }
+    .comparison-table thead .th-price .th-period {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+    }
+    .comparison-table thead th.featured-col {
+      background: rgba(139,92,246,0.06);
+      border-top: 1px solid rgba(139,92,246,0.4);
+      border-left: 1px solid rgba(139,92,246,0.4);
+      border-right: 1px solid rgba(139,92,246,0.4);
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+    }
+    .comparison-table .cat-row td {
+      padding: 16px 24px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+    .comparison-table tbody tr td {
+      padding: 14px 24px;
+      color: var(--text-sub);
+      border-bottom: 1px solid var(--border);
+    }
+    .comparison-table tbody tr td:first-child { font-weight: 500; color: var(--text); }
+    .comparison-table tbody tr td.featured-col {
+      background: rgba(139,92,246,0.04);
+      border-left: 1px solid rgba(139,92,246,0.4);
+      border-right: 1px solid rgba(139,92,246,0.4);
+    }
+    .comparison-table tbody tr:last-child td.featured-col {
+      border-bottom: 1px solid rgba(139,92,246,0.4);
+      border-radius: 0 0 var(--r-lg) var(--r-lg);
+    }
+    .comparison-table .check-icon { color: var(--blue); font-size: 18px; }
+    .comparison-table .cross-icon { color: var(--border-strong); font-size: 18px; }
+    .comparison-table td { text-align: center; }
+    .comparison-table td:first-child { text-align: left; }
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: var(--r-lg);
+      border: 1px solid var(--border);
+    }
+
+    /* ── FAQ ────────────────────────────────────────── */
+    .faq-section { padding: var(--section-gap) 0; }
+    .faq-list { max-width: 780px; margin: 56px auto 0; display: flex; flex-direction: column; gap: 16px; }
+    .faq-item {
+      border-radius: var(--r-lg);
+      border: 1px solid var(--border);
+      background: var(--glass);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item:hover { border-color: var(--border-strong); }
+    .faq-item.open { border-color: rgba(139,92,246,0.3); }
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 28px;
+      cursor: pointer;
+      gap: 16px;
+    }
+    .faq-q-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.4;
+    }
+    .faq-chevron {
+      font-size: 20px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--purple); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+    .faq-item.open .faq-a { max-height: 400px; }
+    .faq-a-inner {
+      padding: 0 28px 24px;
+      font-size: 15px;
+      color: var(--text-sub);
+      line-height: 1.75;
+    }
+    .faq-a-inner a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ── Bottom CTA ─────────────────────────────────── */
+    .pricing-bottom-cta {
+      padding: 80px 0 100px;
+      text-align: center;
+    }
+    .pricing-bottom-cta-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 48px;
+      border-radius: var(--r-xl);
+      background: var(--glass);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid rgba(139,92,246,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-bottom-cta-inner::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse, rgba(139,92,246,0.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pricing-bottom-cta-inner h2 {
+      font-family: 'Kiona', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .pricing-bottom-cta-inner p {
+      font-size: 17px;
+      color: var(--text-sub);
+      margin-bottom: 36px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+      position: relative;
+    }
+    .pricing-bottom-cta-inner .cta-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+    .trust-badges {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .trust-badge i { font-size: 16px; color: var(--blue); }
+
+    /* ── Responsive ─────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .full-pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
+      .pricing-bottom-cta-inner { padding: 48px 32px; }
+    }
+    @media (max-width: 768px) {
+      .pricing-hero { padding: 130px 0 60px; }
+      .full-pricing-grid { max-width: 100%; }
+      .table-wrap { font-size: 13px; }
+      .comparison-table thead .th-price { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAV ═══════════════════════════════════════════════════ -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">MOJIN</a>
+      <ul class="nav-links">
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="gallery.html">Templates</a></li>
+        <li><a href="pricing.html" style="color:#fff">Pricing</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
+      <div class="nav-cta">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="de">DE</button>
+        <a href="#" class="nav-btn">Start Free</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ══════════════════════════════════════════════════ -->
+  <section class="pricing-hero">
+    <div class="container">
+      <div class="pricing-hero-eyebrow appear" style="margin:0 auto 28px">
+        <i class="ri-price-tag-3-line"></i>
+        Pricing
+      </div>
+      <h1 class="pricing-hero-title appear">
+        Simple pricing.<br><em>No surprises.</em>
+      </h1>
+      <p class="pricing-hero-sub appear">
+        Start free and export your first video today. Upgrade when you're ready for more resolution, more templates, or API access.
+      </p>
+      <div class="appear" style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div class="billing-toggle">
+          <span class="active">Monthly</span>
+          <span>Annual <span class="billing-save">–20%</span></span>
+        </div>
+        <p style="font-size:12px;color:var(--text-muted)">Annual billing saves up to €94/year</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FULL PRICING CARDS ════════════════════════════════════ -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="full-pricing-grid">
+
+        <!-- FREE -->
+        <div class="full-pricing-card appear">
+          <p class="full-pricing-tier">Free</p>
+          <div class="full-pricing-price">
+            <span class="currency">€</span>0<span class="period"></span>
+          </div>
+          <p class="full-pricing-period">Forever free — no credit card required</p>
+          <a href="#" class="full-pricing-cta ghost">
+            <i class="ri-arrow-right-line"></i>
+            Get Started Free
+          </a>
+          <div class="full-pricing-divider"></div>
+          <ul class="full-pricing-features">
+            <li class="feat-label">Exports</li>
+            <li><i class="ri-check-line check"></i> 5 exports per month</li>
+            <li><i class="ri-check-line check"></i> 720p resolution (HD)</li>
+            <li><i class="ri-close-line cross"></i> 4K resolution</li>
+            <li class="feat-label">Templates & Effects</li>
+            <li><i class="ri-check-line check"></i> 3 starter templates</li>
+            <li><i class="ri-check-line check"></i> Up to 500 particles</li>
+            <li><i class="ri-close-line cross"></i> Full template library</li>
+            <li><i class="ri-close-line cross"></i> Custom template upload</li>
+            <li class="feat-label">Formats</li>
+            <li><i class="ri-check-line check"></i> MP4 export</li>
+            <li><i class="ri-close-line cross"></i> WebM / GIF / APNG</li>
+            <li class="feat-label">Platform</li>
+            <li><i class="ri-check-line check"></i> Live preview editor</li>
+            <li><i class="ri-close-line cross"></i> AI Motion Assist</li>
+            <li><i class="ri-close-line cross"></i> API access</li>
+            <li><i class="ri-close-line cross"></i> Team workspace</li>
+            <li><i class="ri-close-line cross"></i> Priority rendering</li>
+          </ul>
+        </div>
+
+        <!-- PRO (featured) -->
+        <div class="full-pricing-card featured appear">
+          <div class="full-pricing-badge">Most Popular</div>
+          <p class="full-pricing-tier" style="color:var(--purple)">Pro</p>
+          <div class="full-pricing-price">
+            <span class="currency">€</span>12<span class="period"> / month</span>
+          </div>
+          <p class="full-pricing-period">Billed monthly — cancel anytime</p>
+          <a href="#" class="full-pricing-cta primary">
+            <i class="ri-play-circle-line"></i>
+            Start Pro Trial
+          </a>
+          <div class="full-pricing-divider"></div>
+          <ul class="full-pricing-features">
+            <li class="feat-label">Exports</li>
+            <li><i class="ri-check-line check"></i> 50 exports per month</li>
+            <li><i class="ri-check-line check"></i> Up to 1080p Full HD</li>
+            <li><i class="ri-close-line cross"></i> 4K resolution</li>
+            <li class="feat-label">Templates & Effects</li>
+            <li><i class="ri-check-line check"></i> All 50+ templates</li>
+            <li><i class="ri-check-line check"></i> Up to 2,000 particles</li>
+            <li><i class="ri-check-line check"></i> Full template library</li>
+            <li><i class="ri-close-line cross"></i> Custom template upload</li>
+            <li class="feat-label">Formats</li>
+            <li><i class="ri-check-line check"></i> MP4 export</li>
+            <li><i class="ri-check-line check"></i> WebM + GIF</li>
+            <li><i class="ri-close-line cross"></i> APNG</li>
+            <li class="feat-label">Platform</li>
+            <li><i class="ri-check-line check"></i> Live preview editor</li>
+            <li><i class="ri-check-line check"></i> AI Motion Assist</li>
+            <li><i class="ri-close-line cross"></i> API access</li>
+            <li><i class="ri-close-line cross"></i> Team workspace</li>
+            <li><i class="ri-close-line cross"></i> Priority rendering</li>
+          </ul>
+        </div>
+
+        <!-- STUDIO -->
+        <div class="full-pricing-card appear">
+          <p class="full-pricing-tier">Studio</p>
+          <div class="full-pricing-price">
+            <span class="currency">€</span>39<span class="period"> / month</span>
+          </div>
+          <p class="full-pricing-period">Billed monthly — cancel anytime</p>
+          <a href="#" class="full-pricing-cta ghost">
+            <i class="ri-building-line"></i>
+            Contact Sales
+          </a>
+          <div class="full-pricing-divider"></div>
+          <ul class="full-pricing-features">
+            <li class="feat-label">Exports</li>
+            <li><i class="ri-check-line check"></i> Unlimited exports</li>
+            <li><i class="ri-check-line check"></i> Up to 4K Ultra HD</li>
+            <li><i class="ri-check-line check"></i> 4K resolution</li>
+            <li class="feat-label">Templates & Effects</li>
+            <li><i class="ri-check-line check"></i> All 50+ templates</li>
+            <li><i class="ri-check-line check"></i> Up to 5,000 particles</li>
+            <li><i class="ri-check-line check"></i> Full template library</li>
+            <li><i class="ri-check-line check"></i> Custom template upload</li>
+            <li class="feat-label">Formats</li>
+            <li><i class="ri-check-line check"></i> MP4 export</li>
+            <li><i class="ri-check-line check"></i> WebM + GIF</li>
+            <li><i class="ri-check-line check"></i> APNG</li>
+            <li class="feat-label">Platform</li>
+            <li><i class="ri-check-line check"></i> Live preview editor</li>
+            <li><i class="ri-check-line check"></i> AI Motion Assist</li>
+            <li><i class="ri-check-line check"></i> Full API access</li>
+            <li><i class="ri-check-line check"></i> Team workspace (5 seats)</li>
+            <li><i class="ri-check-line check"></i> Priority rendering queue</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ COMPARISON TABLE ══════════════════════════════════════ -->
+  <section class="comparison-section">
+    <div class="container">
+      <p class="eyebrow appear" style="justify-content:center">Full Comparison</p>
+      <h2 class="section-title appear" style="text-align:center">Everything side by side</h2>
+      <p class="section-sub appear" style="text-align:center;margin:0 auto">
+        Every feature, every plan — no fine print.
+      </p>
+      <div class="table-wrap appear" style="margin-top:48px">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th style="width:35%"></th>
+              <th>
+                <div class="th-plan">Free</div>
+                <div class="th-price">€0<span class="th-period"></span></div>
+              </th>
+              <th class="featured-col">
+                <div class="th-plan highlight">Pro</div>
+                <div class="th-price">€12<span class="th-period">/mo</span></div>
+              </th>
+              <th>
+                <div class="th-plan">Studio</div>
+                <div class="th-price">€39<span class="th-period">/mo</span></div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Exports -->
+            <tr class="cat-row"><td colspan="4">Exports</td></tr>
+            <tr>
+              <td>Monthly exports</td>
+              <td>5</td>
+              <td class="featured-col">50</td>
+              <td>Unlimited</td>
+            </tr>
+            <tr>
+              <td>Max resolution</td>
+              <td>720p</td>
+              <td class="featured-col">1080p</td>
+              <td>4K</td>
+            </tr>
+            <tr>
+              <td>Export speed</td>
+              <td>Standard</td>
+              <td class="featured-col">Fast</td>
+              <td>Priority</td>
+            </tr>
+            <tr>
+              <td>Export formats</td>
+              <td>MP4</td>
+              <td class="featured-col">MP4, WebM, GIF</td>
+              <td>MP4, WebM, GIF, APNG</td>
+            </tr>
+            <tr>
+              <td>Watermark</td>
+              <td>Yes</td>
+              <td class="featured-col"><i class="ri-close-line cross-icon"></i></td>
+              <td><i class="ri-close-line cross-icon"></i></td>
+            </tr>
+            <!-- Templates -->
+            <tr class="cat-row"><td colspan="4">Templates & Effects</td></tr>
+            <tr>
+              <td>Available templates</td>
+              <td>3</td>
+              <td class="featured-col">50+</td>
+              <td>50+ + custom</td>
+            </tr>
+            <tr>
+              <td>Max particle count</td>
+              <td>500</td>
+              <td class="featured-col">2,000</td>
+              <td>5,000</td>
+            </tr>
+            <tr>
+              <td>Spring physics presets</td>
+              <td>3</td>
+              <td class="featured-col">12</td>
+              <td>Unlimited</td>
+            </tr>
+            <tr>
+              <td>Custom template upload</td>
+              <td><i class="ri-close-line cross-icon"></i></td>
+              <td class="featured-col"><i class="ri-close-line cross-icon"></i></td>
+              <td><i class="ri-check-line check-icon"></i></td>
+            </tr>
+            <!-- Platform -->
+            <tr class="cat-row"><td colspan="4">Platform</td></tr>
+            <tr>
+              <td>Live preview editor</td>
+              <td><i class="ri-check-line check-icon"></i></td>
+              <td class="featured-col"><i class="ri-check-line check-icon"></i></td>
+              <td><i class="ri-check-line check-icon"></i></td>
+            </tr>
+            <tr>
+              <td>AI Motion Assist</td>
+              <td><i class="ri-close-line cross-icon"></i></td>
+              <td class="featured-col"><i class="ri-check-line check-icon"></i></td>
+              <td><i class="ri-check-line check-icon"></i></td>
+            </tr>
+            <tr>
+              <td>REST API access</td>
+              <td><i class="ri-close-line cross-icon"></i></td>
+              <td class="featured-col"><i class="ri-close-line cross-icon"></i></td>
+              <td><i class="ri-check-line check-icon"></i></td>
+            </tr>
+            <tr>
+              <td>Team workspace</td>
+              <td><i class="ri-close-line cross-icon"></i></td>
+              <td class="featured-col"><i class="ri-close-line cross-icon"></i></td>
+              <td>5 seats</td>
+            </tr>
+            <tr>
+              <td>Extra team seats</td>
+              <td><i class="ri-close-line cross-icon"></i></td>
+              <td class="featured-col"><i class="ri-close-line cross-icon"></i></td>
+              <td>€8 / seat / mo</td>
+            </tr>
+            <!-- Support -->
+            <tr class="cat-row"><td colspan="4">Support</td></tr>
+            <tr>
+              <td>Community support</td>
+              <td><i class="ri-check-line check-icon"></i></td>
+              <td class="featured-col"><i class="ri-check-line check-icon"></i></td>
+              <td><i class="ri-check-line check-icon"></i></td>
+            </tr>
+            <tr>
+              <td>Email support</td>
+              <td><i class="ri-close-line cross-icon"></i></td>
+              <td class="featured-col"><i class="ri-check-line check-icon"></i></td>
+              <td><i class="ri-check-line check-icon"></i></td>
+            </tr>
+            <tr>
+              <td>Priority support</td>
+              <td><i class="ri-close-line cross-icon"></i></td>
+              <td class="featured-col"><i class="ri-close-line cross-icon"></i></td>
+              <td><i class="ri-check-line check-icon"></i></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ═══════════════════════════════════════════════════ -->
+  <section class="faq-section">
+    <div class="container">
+      <p class="eyebrow appear" style="justify-content:center">FAQ</p>
+      <h2 class="section-title appear" style="text-align:center">Frequently asked questions</h2>
+      <p class="section-sub appear" style="text-align:center;margin:0 auto">
+        Quick answers to the questions we get asked most.
+      </p>
+
+      <div class="faq-list">
+
+        <!-- FAQ 1 -->
+        <div class="faq-item appear" data-faq>
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">What file formats can I export my video in?</span>
+            <i class="ri-arrow-down-s-line faq-chevron"></i>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              Export format depends on your plan. The <strong>Free</strong> tier outputs MP4 (H.264, 720p). <strong>Pro</strong> adds WebM (VP9) and GIF support at up to 1080p. The <strong>Studio</strong> plan unlocks everything: MP4, WebM, GIF, and APNG — all up to 4K. Remotion handles the server-side render, so quality is frame-perfect regardless of format.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item appear" data-faq>
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Can I cancel my subscription at any time?</span>
+            <i class="ri-arrow-down-s-line faq-chevron"></i>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              Yes — cancel anytime from your account dashboard with one click. No cancellation fees, no minimum terms. When you cancel, your plan stays active until the end of the billing period. After that, your account rolls back to the Free tier automatically and you keep access to your previously exported files.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item appear" data-faq>
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Does Mojin have an API for programmatic rendering?</span>
+            <i class="ri-arrow-down-s-line faq-chevron"></i>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              The REST API is available on the <strong>Studio</strong> plan. It lets you trigger renders, pass template parameters, poll job status, and download outputs — all without touching the browser editor. Ideal for automated pipelines, CMS integrations, or batch video generation. API keys are managed in your Studio dashboard. Full API docs are coming soon; Studio subscribers get early access.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item appear" data-faq>
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">How do team seats work in the Studio plan?</span>
+            <i class="ri-arrow-down-s-line faq-chevron"></i>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              The Studio plan includes <strong>5 team seats</strong> by default — each seat gets full Pro-level access plus shared template libraries and a unified export quota. You can add extra seats for €8 per seat per month. All seats share the Studio workspace, so your team can collaborate on the same project assets without duplicating work.
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-item appear" data-faq>
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">What is your refund policy?</span>
+            <i class="ri-arrow-down-s-line faq-chevron"></i>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              We offer a <strong>7-day money-back guarantee</strong> on all paid plans. If you're not happy within the first 7 days after upgrading, contact us at <a href="mailto:support@mojin.app">support@mojin.app</a> and we'll issue a full refund — no questions asked. For annual plans, a pro-rated refund is available within 30 days of purchase.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BOTTOM CTA ════════════════════════════════════════════ -->
+  <section class="pricing-bottom-cta">
+    <div class="container">
+      <div class="pricing-bottom-cta-inner appear">
+        <h2>
+          Ready to make your<br>
+          <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">videos move?</span>
+        </h2>
+        <p>Start with the free plan — no credit card required. Export your first video in under two minutes.</p>
+        <div class="cta-actions">
+          <a href="#" class="btn btn-primary">
+            <i class="ri-play-circle-line"></i>
+            Start Editing Free
+          </a>
+          <a href="gallery.html" class="btn btn-ghost">
+            <i class="ri-layout-grid-line"></i>
+            Browse Templates
+          </a>
+        </div>
+        <div class="trust-badges">
+          <div class="trust-badge"><i class="ri-lock-line"></i> No credit card needed</div>
+          <div class="trust-badge"><i class="ri-shield-check-line"></i> 7-day money-back</div>
+          <div class="trust-badge"><i class="ri-timer-line"></i> Export in &lt;2 seconds</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">MOJIN</div>
+          <p class="footer-tagline">Motion intelligence for every creator. Powered by Remotion and GPU particle physics.</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/lunexolabs" target="_blank" rel="noopener"><i class="ri-instagram-line"></i></a>
+            <a href="https://www.youtube.com/@lunexolabs" target="_blank" rel="noopener"><i class="ri-youtube-line"></i></a>
+            <a href="https://github.com/TheWinterProgrammer" target="_blank" rel="noopener"><i class="ri-github-fill"></i></a>
+          </div>
+        </div>
+        <div>
+          <p class="footer-col-title">Product</p>
+          <ul class="footer-links">
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="gallery.html">Templates</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="#">Editor</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Developers</p>
+          <ul class="footer-links">
+            <li><a href="#">API Reference</a></li>
+            <li><a href="#">Remotion Docs</a></li>
+            <li><a href="#">Template SDK</a></li>
+            <li><a href="https://github.com/TheWinterProgrammer/Lunexo" target="_blank">GitHub</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Company</p>
+          <ul class="footer-links">
+            <li><a href="#">About</a></li>
+            <li><a href="https://www.instagram.com/lunexolabs" target="_blank">Instagram</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Mojin. All rights reserved.</p>
+        <p>A Lunexo Labs product.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/lang.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    /* FAQ accordion */
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    /* Billing toggle UI */
+    document.querySelectorAll('.billing-toggle span').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.billing-toggle span').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

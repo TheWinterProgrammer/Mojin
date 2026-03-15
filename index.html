@@ -6,6 +6,7 @@
   <meta name="description" content="Mojin — Motion intelligence platform. Fine-tune spring physics, particle effects, and motion curves. Export studio-quality video from your browser.">
   <title>Mojin — Motion Intelligence</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/favicon-placeholder.css">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
   <style>
     @keyframes demoFloat {
@@ -48,7 +49,7 @@
       <ul class="nav-links">
         <li><a href="#features" data-i18n="nav_features">Features</a></li>
         <li><a href="#templates" data-i18n="nav_templates">Templates</a></li>
-        <li><a href="#pricing" data-i18n="nav_pricing">Pricing</a></li>
+        <li><a href="pricing.html" data-i18n="nav_pricing">Pricing</a></li>
         <li><a href="gallery.html" data-i18n="nav_docs">Gallery</a></li>
       </ul>
       <div class="nav-cta">
@@ -93,6 +94,101 @@
       <span data-i18n="hero_scroll">Scroll</span>
     </div>
   </section>
+
+  <!-- ═══ STATS BAR ════════════════════════════════════════════ -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-inner">
+        <div class="stat-item appear">
+          <span class="stat-number">50<span class="stat-plus">+</span></span>
+          <span class="stat-label">Templates</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item appear" style="animation-delay:0.1s">
+          <span class="stat-number">5,000</span>
+          <span class="stat-label">Particles</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item appear" style="animation-delay:0.2s">
+          <span class="stat-number">&lt;2<span class="stat-plus">s</span></span>
+          <span class="stat-label">Export</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style>
+    .stats-bar {
+      padding: 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .stats-inner {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 32px 64px;
+    }
+    .stat-number {
+      font-family: 'Kiona', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-plus {
+      font-size: 1.6rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+    }
+    .stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .stat-divider {
+      width: 1px;
+      background: var(--border);
+      align-self: stretch;
+      margin: 16px 0;
+    }
+    @media (max-width: 768px) {
+      .stat-item { padding: 24px 28px; }
+      .stat-number { font-size: 1.8rem; }
+    }
+    /* Staggered appear delays for nth-child */
+    .steps-grid .step-card:nth-child(1).appear { transition-delay: 0s; }
+    .steps-grid .step-card:nth-child(2).appear { transition-delay: 0.1s; }
+    .steps-grid .step-card:nth-child(3).appear { transition-delay: 0.2s; }
+    .features-grid .feature-card:nth-child(1).appear { transition-delay: 0s; }
+    .features-grid .feature-card:nth-child(2).appear { transition-delay: 0.08s; }
+    .features-grid .feature-card:nth-child(3).appear { transition-delay: 0.16s; }
+    .features-grid .feature-card:nth-child(4).appear { transition-delay: 0.24s; }
+    .features-grid .feature-card:nth-child(5).appear { transition-delay: 0.32s; }
+    .features-grid .feature-card:nth-child(6).appear { transition-delay: 0.4s; }
+    .pricing-grid .pricing-card:nth-child(1).appear { transition-delay: 0s; }
+    .pricing-grid .pricing-card:nth-child(2).appear { transition-delay: 0.12s; }
+    .pricing-grid .pricing-card:nth-child(3).appear { transition-delay: 0.24s; }
+    .templates-scroll .template-card:nth-child(1).appear { transition-delay: 0s; }
+    .templates-scroll .template-card:nth-child(2).appear { transition-delay: 0.1s; }
+    .templates-scroll .template-card:nth-child(3).appear { transition-delay: 0.2s; }
+    .templates-scroll .template-card:nth-child(4).appear { transition-delay: 0.3s; }
+    .templates-scroll .template-card:nth-child(5).appear { transition-delay: 0.4s; }
+    .templates-scroll .template-card:nth-child(6).appear { transition-delay: 0.5s; }
+  </style>
 
   <!-- ═══ HOW IT WORKS ══════════════════════════════════════════ -->
   <section class="section" id="how">
