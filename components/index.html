@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remotion Components — Mojin Studio</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      background: #0D0D14;
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 60px 24px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .header h1 {
+      font-size: 40px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #3b82f6, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+
+    .header p {
+      color: #94a3b8;
+      font-size: 18px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 32px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59, 130, 246, 0.3);
+      box-shadow: 0 8px 40px rgba(59, 130, 246, 0.1);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .card h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #f1f5f9;
+    }
+
+    .card .desc {
+      color: #94a3b8;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .props {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .prop-tag {
+      font-size: 12px;
+      font-family: "SF Mono", "Fira Code", monospace;
+      background: rgba(59, 130, 246, 0.12);
+      color: #60a5fa;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(59, 130, 246, 0.15);
+    }
+
+    .g-blue  { background: linear-gradient(135deg, #1e3a5f, #0f172a); }
+    .g-cyan  { background: linear-gradient(135deg, #064e3b, #0f172a); }
+    .g-purple { background: linear-gradient(135deg, #3b1f6b, #0a0a1a); }
+    .g-pink  { background: linear-gradient(135deg, #7c1e4a, #0f0f0f); }
+    .g-teal  { background: linear-gradient(135deg, #0d4a2e, #050510); }
+    .g-violet { background: linear-gradient(135deg, #3a0a5a, #0f0a1a); }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #64748b;
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 32px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: #3b82f6; }
+  </style>
+</head>
+<body>
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <a href="../index.html" class="back-link">
+      <i class="ri-arrow-left-line"></i> Back to Mojin
+    </a>
+  </div>
+
+  <div class="header">
+    <h1>Remotion Components</h1>
+    <p>Six production-ready animation primitives for Remotion. Spring physics, particle effects, and procedural motion.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-icon g-blue"><i class="ri-hashtag"></i></div>
+      <h2>AnimatedCounter</h2>
+      <p class="desc">Spring-driven counter that animates between numeric values. Uses stiffness 80 / damping 15 for a snappy, natural feel.</p>
+      <div class="props">
+        <span class="prop-tag">from</span>
+        <span class="prop-tag">to</span>
+        <span class="prop-tag">prefix</span>
+        <span class="prop-tag">suffix</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon g-cyan"><i class="ri-text"></i></div>
+      <h2>TextReveal</h2>
+      <p class="desc">Words slide up and fade in with stagger timing. Each word is delayed by its index for a cascading entrance effect.</p>
+      <div class="props">
+        <span class="prop-tag">text</span>
+        <span class="prop-tag">color</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon g-purple"><i class="ri-sparkling-line"></i></div>
+      <h2>ParticleBurst</h2>
+      <p class="desc">40-particle explosion with random angular distribution. Spring-based radial spread with opacity fade at the end.</p>
+      <div class="props">
+        <span class="prop-tag">count</span>
+        <span class="prop-tag">colors[]</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon g-pink"><i class="ri-equalizer-line"></i></div>
+      <h2>WaveformBar</h2>
+      <p class="desc">20 equalizer bars oscillating with layered sine waves. Purple-to-pink gradient with smooth, organic movement.</p>
+      <div class="props">
+        <span class="prop-tag">barCount</span>
+        <span class="prop-tag">barWidth</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon g-teal"><i class="ri-flashlight-line"></i></div>
+      <h2>GlowReveal</h2>
+      <p class="desc">Left-to-right glow sweep that reveals text with a travelling shine overlay. Transitions into a gentle breathe pulse.</p>
+      <div class="props">
+        <span class="prop-tag">text</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon g-violet"><i class="ri-font-size-2"></i></div>
+      <h2>MorphingText</h2>
+      <p class="desc">Cycles through words with blur + scale morph transitions. Each word fades in from a blurred, scaled-down state.</p>
+      <div class="props">
+        <span class="prop-tag">words[]</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
